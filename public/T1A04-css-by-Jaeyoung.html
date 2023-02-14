@@ -12,9 +12,12 @@ Here is typical in document style
 b { color: #00ff00; 
 }
 </pre><br>
-
-I do CSS inside the tag. It overpowers all other methods<br>
-
+<style>
+    p.outset {border-style: outset}
+    p.outset {border-style: outset;
+        border-color: #009812}
+    <p class>="outset">I do CSS inside the tag. It overpowers all other methods./p>
+</style>
 <b > The is bold </b><br>
 <b id="myB1" style="color:#00ff00; background-Color:blue; "> This is bold</b>
 <input type=button value=Change onclick="{
