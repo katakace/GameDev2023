@@ -1,43 +1,12 @@
 
-Version 0.0.1<br>
-
-
-<body id="myBody" style="background-repeat:repeat; background-size: 80%" background="https://thumb.ac-illust.com/92/92db41588fb6acb7b8056401602ed159_t.jpeg"     onkeydown="{
-
-   let myKey = event.key
-   //  let myKey = String.toLowerCase(event.key)
-   document.getElementById('myDiv01').innerHTML = myKey
-   if (myKey == 'd') {
-
-
-     // either uncomment
-     // clearInterval(myInterval)
-     // myInterval = setInterval(function(){
-     //    document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 3
-     //    myCheckHit()
-     // } ,20)
-
-     // or do the following
-      document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 7
-      myCheckHit()
-   }
-
-
-   // put your other keydowns here.
-
-
-
-}">
-
-<h1 align=center>t4a01-game-template-with-wasd-by-fred</h1>
-<br><br><br><br>
-
 <script>
 
    // global variables here
+
    let myGlobalX = 0
    let myClock
-   let myInterval=0;
+   let myScore = 10
+
 
    // global functions here
 function myHitOther(my1,my2){
@@ -56,6 +25,8 @@ function myHitOther(my1,my2){
        return true
    }
 }
+
+
 function myCheckHit(){
    document.all.myText01.value = myScore  // show the present score
 
@@ -64,26 +35,66 @@ function myCheckHit(){
       document.all.myText01.value = 'You hit myImg02'  
       myScore -= 1
    }   
-
-function myCheckHit(){
-   if ( myHitOther('myImg01','myImg02') ){
-       alert('you lose')  
-       document.getElementById('myImg01').style.left = '20px'
-       location = 't2a13-keydown.html'  // go to your next level
+   
+   if ( myHitOther('myImg01','myImg03') ){
+       //alert('you lose')
+      document.getElementById('myImg01').style.left = '20px'
+      document.all.myText01.value = 'You hit myImg03'  
+      myScore -= 1
+   }   
+   
+  // you LOSE refresh the page
+   if (myScore <= 0){
+    document.all.myText01.value = 'You Lose scrore at zero!'  
+    alert('Sorry you lose')
+    location.reload()
    }
 
+   // YOU WIN and go to next level!
 
-   // more if statements here like the above
+   if ( myHitOther('myImg01','myImg04') ){
+      document.all.myText01.value = 'You hit myImg04 and you win the game!'  
+       alert('You Win, now go to the next level')
+      document.getElementById('myImg01').style.left = '20px'
+      location = 'https://www.google.ca'
+   }
 
+   // more if statements here
 
-
-}  // end of myCheckHit()
+}
 
 
 </script>
 
-<img id="myImg01" style="position:absolute; width:100px; height:80px; top:0px; left:50px;"  src="myImage01.jpg">
-<img id="myImg02" style="position:absolute; width:100px; height:80px; top:0px; left:250px;" src="myImage02.jpg">
+
+
+
+<body id="myBody" style="background-repeat:repeat; background-size: 80%" background="https://thumb.ac-illust.com/92/92db41588fb6acb7b8056401602ed159_t.jpeg"  onkeydown="{
+
+   document.all.myText01.value = event.key
+
+   if (event.key == 'd') {  // d = go right
+     document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
+   }   
+
+   if (event.key == 's') {   // s = go down
+      document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
+   }  
+
+   // put more here
+
+
+
+  myCheckHit()     // checks for all collisions
+}">
+
+
+
+
+
+<h1 align=center><font color=Yellow>T4A05 Template with WASD by Fred</font></h1>
+
+<input id="myText01" type=text value="" size=50 placeholder="Feedback here"><br>
 
 <input type=button value="Auto Background Left" onclick="{
   clearInterval(myClock)
@@ -97,10 +108,23 @@ function myCheckHit(){
 }">
 
 
-<input type=button value="Image Right Fast Button" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
+<input type=button value="Right" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
   document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
+  myCheckHit()     // checks for all collisions
+}">
+
+<input type=button value="Down" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
+  document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
   myCheckHit()     // checks for all collisions
 }"><br><br>
 
 
-<div id="myDiv01" style="color:yellow">..</div>
+
+
+<img id="myImg01" src="https://s3.orbi.kr/data/file/united2/f7f7190454704cf986902eea9850bf27.jpeg"  style="position:absolute; width:100px; height:80px; left: 50px; top:190px;">
+<img id="myImg02" src="https://mblogthumb-phinf.pstatic.net/MjAyMDA5MTBfMjE1/MDAxNTk5NjY1MTgzMTgz.ZH_eckqzigM758RKrpC3xe3HcDBSP-CdZPnNXboBDZgg.kV4aX0KAhCh3Xo_Tbyp_Y9WN2z4C8oojkVYJ5wxu2Bog.PNG.subak137/1599665183489.png?type=w800"  style="position:absolute; width:100px; height:80px; left:350px; top:190px;">
+<img id="myImg03" src="myImgNew.jpg"  style="position:absolute; width:100px; height:80px; left:500px; top:190px;">
+<img id="myImg04" src="myImgNew.jpg"  style="position:absolute; width:100px; height:80px; left:500px; top:400px;">
+
+   
+<input type=button value="Restart" onTouchStart="{this.click(); event preventDefault();}" onclick="{
